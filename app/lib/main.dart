@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => TodoListModel(),
-      child: const MaterialApp(
+      child: MaterialApp(
         home: TodoList(),
         debugShowCheckedModeBanner: false,
       ),

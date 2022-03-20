@@ -9,6 +9,8 @@ import './environment.dart';
 
 class TodoListModel extends ChangeNotifier {
   List<Task> todos = [];
+  bool isLoading = true;
+  int taskCount = 0;
   final String _rpcUrl = "http://192.168.10.101:7545";
   // '_rpcurl' will be of ganache network url
   final String _wsUrl = "ws://192.168.10.101:7545/";
@@ -34,7 +36,7 @@ class TodoListModel extends ChangeNotifier {
   late DeployedContract _contract;
 
   // making smart contract function, variables, mapping
-  late ContractFunction _taskCount;
+  late ContractFunction _taskCount; //contract function
   late ContractFunction _todos; // contract mapping
   late ContractFunction _createTask;
   late ContractEvent _taskCreatedEvent;
@@ -43,13 +45,16 @@ class TodoListModel extends ChangeNotifier {
     initialSetup();
   }
 
-  initialSetup() async {
+  Future<void> initialSetup() async {
     // this function will call all the other method and initiate the variable 'Web3Client'
     _client = Web3Client(_rpcUrl, Client(), socketConnector: () {
       return IOWebSocketChannel.connect(_wsUrl).cast<String>();
     });
 
-    getAbi();
+    await getAbi();
+    await getCredentials();
+    await getDeployedContract();
+    getTodos();
   }
 
   Future<void> getAbi() async {
@@ -87,6 +92,49 @@ class TodoListModel extends ChangeNotifier {
 
     _taskCount = _contract.function("taskCount");
     // here we are assigning the "taskCount" getter function and assigning in the variable
+    // assigning all the function,mapping,event
+    _createTask = _contract.function("createTask");
+    _todos = _contract.function("todos");
+    _taskCreatedEvent = _contract.event("TaskCreated");
+  }
+
+  getTodos() async {
+    // this function will first get the task count
+    // calling smart contract function
+    List totalTaskList = await _client
+        .call(contract: _contract, function: _taskCount, params: []);
+    BigInt totalTask = totalTaskList[0];
+    // taskCount function doesn't take any parameter so we are passing empty list
+    // solidity smart contract return multiple value from the function so it will return as the list
+
+    // first we will create all the todos list
+    taskCount = totalTask.toInt();
+    todos.clear();
+    for (int i = 0; i < taskCount.toInt(); i++) {
+      var task = await _client.call(
+          contract: _contract, function: _todos, params: [BigInt.from(i)]);
+      // while calling smart contract 'todos' mapping we have to pass 'uint256' which is the index of the mapping as parameter so that it can fetch that particular mapping 'Tasks' data;
+      todos.add(Task(taskName: task[0], isCompleted: task[1]));
+      // now we will add to todos list
+    }
+    isLoading = false;
+    notifyListeners();
+  }
+
+  addTask(String taskName) async {
+    // this function will going to add the task
+    isLoading = true;
+    notifyListeners();
+
+    // when we are changing the state of the blockchain then we have to send the transaction
+    await _client.sendTransaction(
+        _credentials,
+        Transaction.callContract(
+            contract: _contract,
+            function: _createTask,
+            parameters: [taskName]));
+    // here we have to pass the credentials
+    getTodos();
   }
 }
 
