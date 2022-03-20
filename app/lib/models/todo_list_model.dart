@@ -37,8 +37,8 @@ class TodoListModel extends ChangeNotifier {
 
     // first we will scan the whole json file as string
     String abiStringFile =
-        await rootBundle.loadString("../../../build/contracts/TodoList.json");
-
+        await rootBundle.loadString("src/contract/TodoList.json");
+    print(_privateKey);
     print(abiStringFile);
   }
 }

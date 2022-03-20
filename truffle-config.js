@@ -22,6 +22,7 @@
 //
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
+const path = require("path");
 
 module.exports = {
   /**
@@ -34,6 +35,7 @@ module.exports = {
    * $ truffle test --network <network-name>
    */
 
+  contracts_build_directory: path.join(__dirname, "app/src/contract"),
   networks: {
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
@@ -41,7 +43,6 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    contract_build_directory: "./",
     development: {
       host: "192.168.10.101", // Localhost (default: none)
       port: 7545, // Standard Ethereum port (default: none)

@@ -11,6 +11,10 @@ import './models/todo_list_model.dart';
   -> flutter pub add provider
 
   -> we will initialize the web3 and other filed in 'models/todo_list_model.dart' 
+
+  -> add on pubspec.yaml:
+    -> assets:
+        - src/contract/TodoList.json
 */
 
 Future<void> main() async {

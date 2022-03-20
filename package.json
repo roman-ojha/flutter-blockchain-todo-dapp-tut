@@ -1,0 +1,25 @@
+{
+  "name": "todo_dapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Roman-Ojha/Blockchain-Todo-Dapp-Tut.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Roman-Ojha/Blockchain-Todo-Dapp-Tut/issues"
+  },
+  "homepage": "https://github.com/Roman-Ojha/Blockchain-Todo-Dapp-Tut#readme",
+  "dependencies": {
+    "path": "^0.12.7"
+  }
+}
