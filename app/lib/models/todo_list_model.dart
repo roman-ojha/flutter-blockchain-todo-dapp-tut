@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
@@ -19,6 +21,12 @@ class TodoListModel extends ChangeNotifier {
 
   late Web3Client _client;
 
+  late String _abiCode;
+  // this will hold the json abi code
+
+  // we also have to get the address part of smart contract which is included in json file
+  // EthereumAddress _contractAddress;
+
   TodoListModel() {
     initialSetup();
   }
@@ -35,11 +43,17 @@ class TodoListModel extends ChangeNotifier {
   Future<void> getAbi() async {
     // and here we will fetch the abi
 
-    // first we will scan the whole json file as string
     String abiStringFile =
         await rootBundle.loadString("src/contract/TodoList.json");
-    print(_privateKey);
-    print(abiStringFile);
+    // first we will scan the whole json file as string
+
+    var jsonAbi = jsonDecode(abiStringFile);
+    // this will going to hold the decode value of this json abi
+
+    _abiCode = jsonAbi["abi"];
+    //here we are assigning abi part of json file
+
+    print(_abiCode);
   }
 }
 
