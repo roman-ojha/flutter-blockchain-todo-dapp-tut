@@ -1,4 +1,13 @@
 -> We will use:
     -> ganache:
         -> change host name to Ethernet
+
+*) Flutter app:
+    -> flutter pub add web3dart
+    -> flutter pub add web_socket_channel
+    -> flutter pub add http
+    -> flutter pub add provider
+
+*) Truffle:
+    -> configure truffle-config.js
         

@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "mobile",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "mobile (profile mode)",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    }
+  ]
+}
