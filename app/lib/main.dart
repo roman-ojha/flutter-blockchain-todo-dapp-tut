@@ -15,6 +15,8 @@ import './models/todo_list_model.dart';
   -> add on pubspec.yaml:
     -> assets:
         - src/contract/TodoList.json
+
+  -> https://pub.dev/documentation/web3dart/latest/web3dart/Web3Client-class.html
 */
 
 Future<void> main() async {

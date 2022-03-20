@@ -1,6 +1,6 @@
 # Custom
 .env
-/src/contracts
+/src
 
 # Miscellaneous
 *.class
