@@ -17,6 +17,7 @@ import './models/todo_list_model.dart';
         - src/contract/TodoList.json
 
   -> https://pub.dev/documentation/web3dart/latest/web3dart/Web3Client-class.html
+  -> https://pub.dev/documentation/web3dart/latest/web3dart/web3dart-library.html
 */
 
 Future<void> main() async {

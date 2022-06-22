@@ -19,6 +19,7 @@ class TodoListModel extends ChangeNotifier {
   final privateKey = dotenv.env["PRIVATE_KEY"];
   final String _privateKey = Environment.privateKey;
   // ganache private key
+  // it's my idea , try to send the private key from or other essential information from the backend
 
   late Web3Client _client;
 
